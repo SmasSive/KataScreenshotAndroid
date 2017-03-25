@@ -59,6 +59,14 @@ public class SuperHeroDetailActivityTest extends ScreenshotTest {
     compareScreenshot(activity);
   }
 
+  @Test public void showsAnAvenger() throws Exception {
+    SuperHero superHero = givenAnAvenger();
+
+    Activity activity = startActivity(superHero);
+
+    compareScreenshot(activity);
+  }
+
   private SuperHero givenASuperHero() {
     String superHeroName = "Custom Hero";
     SuperHero superHero = new SuperHero(superHeroName,
@@ -83,6 +91,15 @@ public class SuperHeroDetailActivityTest extends ScreenshotTest {
     SuperHero superHero = new SuperHero(superHeroName,
         "http://www.myfreewallpapers.net/comics/wallpapers/captain-america-lives.jpg", false,
         superHeroDescription);
+    when(repository.getByName(superHeroName)).thenReturn(superHero);
+    return superHero;
+  }
+
+  private SuperHero givenAnAvenger() {
+    String superHeroName = "Custom Avenger Hero";
+    SuperHero superHero = new SuperHero(superHeroName,
+        "http://www.myfreewallpapers.net/comics/wallpapers/captain-america-lives.jpg", true,
+        "Custom Avenger Description");
     when(repository.getByName(superHeroName)).thenReturn(superHero);
     return superHero;
   }
